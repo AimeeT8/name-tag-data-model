@@ -1,13 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import NameTag from "./NameTag.js";
-import { names } from "./data.js";
 import "./styles.css";
 
-const renderNameTag = (name) => <NameTag name={name.person} key={name.id} />;
+const renderNameTag = (name) => <NameTag name={name} key={name} />;
 
-const App = () => {
-  const nameTagElements = names.map(renderNameTag);
+
+class App extends Component {
+
+  state = { names: ["Stan", "Suzy", "Wilifred", "Walter", "Pearl", "Marie"] };
+  render() {
+
+  const nameTagElements = this.state.names.map(renderNameTag);
 
   return (
     <div className="App">
@@ -15,6 +19,7 @@ const App = () => {
       {nameTagElements}
     </div>
   );
+  }
 };
 
 const rootElement = document.getElementById("root");
