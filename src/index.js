@@ -11,7 +11,7 @@ class App extends Component {
   state = { names: ["Stan", "Suzy", "Wilifred", "Walter", "Pearl", "Marie"] };
   render() {
 
-  const nameTagElements = this.state.names.map(renderNameTag);
+  var nameTagElements = this.state.names.map(renderNameTag);
 
   return (
     <div className="App">
