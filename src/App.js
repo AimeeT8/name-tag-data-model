@@ -1,10 +1,16 @@
-import React, { Component, useReducer } from "react";
+import React, { Component } from "react";
 import NameTagList from "./NameTagList.js";
 import UserInput from "./UserInput.js";
 
 class App extends Component {
     state = {
-        names: ["Stan", "Winston", "Wilifred", "Liza", "Pearl", "Chloe"]
+        names: []
+
+    };
+
+    addName = (name) => {
+        const newNames = [name, ...this.state.names];
+        this.setState({ names: newNames });
 
     };
     removeName = (clickedIndex) => {
@@ -12,11 +18,20 @@ class App extends Component {
         const newNames = this.state.names.filter(filterCallBack);
         this.setState({ names: newNames });
     };
-    addName = (name) => {
-        const newNames = [name, ...this.state.names];
-        this.setState({ names: newNames });
 
-    };
+    componentDidUpdate() {
+        const savedNamesString = JSON.stringify(this.state.names);
+        localStorage.setItem("savedNames", savedNamesString);
+    }
+
+    componentDidMount() {
+        const savedNamesString = localStorage.getItem("savedNames");
+        if (savedNamesString) {
+            const savedNames = JSON.parse(savedNamesString);
+            this.setState({ names: savedNames });
+        }
+    }
+    
 
     render() {
         return (
